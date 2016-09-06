@@ -1,3 +1,5 @@
+from django.db import models
+from model_utils.tracker import FieldTracker
 from otree.api import (
     models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
     Currency as c, currency_range
@@ -5,6 +7,7 @@ from otree.api import (
 import random
 
 from django_countries.fields import CountryField
+
 
 
 class Constants(BaseConstants):
@@ -30,7 +33,8 @@ class Player(BasePlayer):
         verbose_name='What is your country of citizenship?')
     q_age = models.PositiveIntegerField(verbose_name='What is your age?',
                                         choices=range(13, 125),
-                                        initial=None)
+                                        initial=None,
+                                        widget=widgets.SliderInput())
     q_gender = models.CharField(initial=None,
                                 choices=['Male', 'Female'],
                                 verbose_name='What is your gender?',
@@ -39,3 +43,5 @@ class Player(BasePlayer):
     crt_bat = models.PositiveIntegerField()
     crt_widget = models.PositiveIntegerField()
     crt_lake = models.PositiveIntegerField()
+
+    title_tracker = FieldTracker(fields=['q_age'])
