@@ -19,13 +19,26 @@
 
 {% endblock %}
 
-{% block content_at_bottom_of_body %}
+{% block scripts %}
 
     <script type="text/javascript">
+        var slider_changed = false;
+
+        $("#id_q_age").change(function(e) {
+            slider_changed = true;
+        });
+
         function sort(a, b) {
             return (a.innerHTML > b.innerHTML) ? 1 : -1;
         }
         $('#id_q_country option').sort(sort).appendTo('#id_q_country');
+
+        $( "#form" ).submit(function( event ) {
+            if (!slider_changed) {
+                alert( "Please change the slider value." );
+                event.preventDefault();
+            }
+        });
     </script>
 
 {% endblock %}

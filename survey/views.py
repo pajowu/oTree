@@ -12,11 +12,6 @@ class Demographics(Page):
                   'q_age',
                   'q_gender']
 
-    x = form_model.title_tracker.has_changed()
-
-    def q_age_error_message(self):
-        if x == True:
-            return 'You must move the slider before you can continue'
 
 class CognitiveReflectionTest(Page):
 
